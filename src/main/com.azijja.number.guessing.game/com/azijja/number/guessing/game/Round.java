@@ -1,5 +1,7 @@
 package com.azijja.number.guessing.game;
 
+import java.util.Scanner;
+
 public class Round {
     private boolean hasWon;
     private int userGuesses;
@@ -9,7 +11,7 @@ public class Round {
         this.difficulty = difficulty;
     }
 
-    public boolean isHasWon() {
+    public boolean isWon() {
         return hasWon;
     }
 
@@ -29,11 +31,13 @@ public class Round {
         return difficulty;
     }
 
-    public void playRound(int numberToGuess, int userGuess) {
+    public void playRound(int numberToGuess, Scanner scanner) {
         int attempts = difficulty.getAttempts();
-
         while (attempts > 0) {
+            
             System.out.print("Enter your guess: ");
+            int userGuess = scanner.nextInt();
+            userGuesses++;
 
             if (userGuess == numberToGuess) {
                 hasWon = true;
