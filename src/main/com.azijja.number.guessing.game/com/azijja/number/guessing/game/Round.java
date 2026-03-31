@@ -1,5 +1,6 @@
 package com.azijja.number.guessing.game;
 
+import java.time.Duration;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ public class Round {
     private boolean hasWon;
     private int userGuesses;
     private Attempts difficulty;
+    private Duration roundDuration;
     
     public Round(Attempts difficulty) {
         this.difficulty = difficulty;
@@ -14,6 +16,14 @@ public class Round {
 
     public boolean isWon() {
         return hasWon;
+    }
+
+    public Duration getRoundDuration() {
+        return roundDuration;
+    }
+
+    public void setRoundDuration(Duration roundDuration) {
+        this.roundDuration = roundDuration;
     }
 
     public void setHasWon(boolean hasWon) {
@@ -33,6 +43,7 @@ public class Round {
     }
 
     public void playRound(int numberToGuess, Scanner scanner) {
+        long startTime = System.currentTimeMillis();
         int attempts = difficulty.getAttempts();
         while (attempts > 0) {
             int userGuess = 0;
@@ -84,5 +95,7 @@ public class Round {
         } else {
             System.out.println("Game over! The number was: " + numberToGuess);
         }
+        long endTime = System.currentTimeMillis();
+        roundDuration = Duration.ofMillis(endTime - startTime);
     }
 }
